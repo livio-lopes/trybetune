@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Search from './Search';
 import Album from './Album';
@@ -38,7 +38,7 @@ export default class Login extends Component {
   };
 
   render() {
-    const { loadindScreen } = this.props;
+    const { loadindScreen, logged } = this.props;
     return (
       <div data-testid="page-login">
         <Switch>
@@ -50,7 +50,7 @@ export default class Login extends Component {
           <Route path="*" component={ NotFound } />
         </Switch>
         {loadindScreen ? <LoadingScreen /> : this.renderForm()}
-
+        {logged && (<Redirect to="/search" />)}
       </div>
     );
   }

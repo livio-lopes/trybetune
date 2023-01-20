@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Redirect } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import { createUser } from './services/userAPI';
 
@@ -29,12 +29,11 @@ class App extends React.Component {
   };
 
   render() {
-    const { logged } = this.state;
     return (
       <div>
         <BrowserRouter>
           <p>TrybeTunes</p>
-          {logged && (<Redirect to="/search" />)}
+
           <Login
             { ...this.state }
             handleLogin={ this.handleLogin }
