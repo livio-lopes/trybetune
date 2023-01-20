@@ -8,8 +8,28 @@ import Profile from './Profile';
 import ProfileEdit from './ProfileEdit';
 import NotFound from './NotFound';
 import LoadingScreen from '../components/LoadingScreen';
+import { getUser } from '../services/userAPI';
 
 export default class Login extends Component {
+  state = {
+    userName: '',
+    loadingScreenLogged: false,
+  };
+
+  componentDidMount() {
+    this.userLogged();
+  }
+
+  userLogged = () => {
+    this.setState({ loadingScreenLogged: true });
+    getUser().then((r) => {
+      this.setState({
+        loadingScreenLogged: false,
+        userName: r.name,
+      });
+    });
+  };
+
   renderForm = () => {
     const { inputName, disableLogin, handleLogin, clickLogin } = this.props;
     return (
@@ -39,18 +59,20 @@ export default class Login extends Component {
 
   render() {
     const { loadindScreen, logged } = this.props;
+    const { loadingScreenLogged } = this.state;
     return (
       <div data-testid="page-login">
         <Switch>
-          <Route path="/search" component={ Search } />
-          <Route path="/album/:id" component={ Album } />
-          <Route path="/favorites" component={ Favorites } />
-          <Route exact path="/profile" component={ Profile } />
-          <Route path="/profile/edit" component={ ProfileEdit } />
+          <Route path="/search"><Search { ...this.state } /></Route>
+          <Route path="/album/:id"><Album { ...this.state } /></Route>
+          <Route path="/favorites"><Favorites { ...this.state } /></Route>
+          <Route exact path="/profile"><Profile { ...this.state } /></Route>
+          <Route path="/profile/edit"><ProfileEdit { ...this.state } /></Route>
           <Route path="*" component={ NotFound } />
         </Switch>
         {loadindScreen ? <LoadingScreen /> : this.renderForm()}
         {logged && (<Redirect to="/search" />)}
+        {loadingScreenLogged && <LoadingScreen />}
       </div>
     );
   }

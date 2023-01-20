@@ -41,5 +41,3 @@ export const updateUser = (updatedUser) => new Promise((resolve) => {
   saveUser({ ...updatedUser });
   simulateRequest(SUCCESS_STATUS)(resolve);
 });
-
-console.log(createUser({ name: 'bode' }));
