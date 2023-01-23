@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import { createUser } from './services/userAPI';
+import './styles/App.css';
 
 class App extends React.Component {
   state = {
@@ -30,10 +31,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container-app">
         <BrowserRouter>
-          <p>TrybeTunes</p>
-
           <Login
             { ...this.state }
             handleLogin={ this.handleLogin }

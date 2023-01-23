@@ -9,6 +9,8 @@ import ProfileEdit from './ProfileEdit';
 import NotFound from './NotFound';
 import LoadingScreen from '../components/LoadingScreen';
 import { getUser } from '../services/userAPI';
+import '../styles/Login.css';
+import logo from '../pictures/logo.svg';
 
 export default class Login extends Component {
   state = {
@@ -33,9 +35,14 @@ export default class Login extends Component {
   renderForm = () => {
     const { inputName, disableLogin, handleLogin, clickLogin } = this.props;
     return (
-      <form action="">
-        <label htmlFor="inputName">
+      <div className="div-login">
+        <img className="logo-login" src={ logo } alt="Logo TrybeTune" />
+
+        <label
+          htmlFor="inputName"
+        >
           <input
+            className="input-login"
             data-testid="login-name-input"
             type="text"
             name="inputName"
@@ -46,14 +53,16 @@ export default class Login extends Component {
           />
         </label>
         <button
+          className="btn-login"
           data-testid="login-submit-button"
           type="button"
           disabled={ disableLogin }
           onClick={ clickLogin }
         >
-          Entrar
+          ENTRAR
         </button>
-      </form>
+
+      </div>
     );
   };
 
@@ -61,15 +70,22 @@ export default class Login extends Component {
     const { loadindScreen, logged } = this.props;
     const { loadingScreenLogged } = this.state;
     return (
-      <div data-testid="page-login">
+      <div
+        className="container-login"
+        data-testid="page-login"
+      >
+        {loadindScreen ? <LoadingScreen /> : this.renderForm()}
+        {logged && (<Redirect to="/search" />)}
+        {loadingScreenLogged && <LoadingScreen />}
         <Switch>
-          <Route path="/search">
+          <Route exact path="/search">
             <Search
               { ...this.state }
             />
 
           </Route>
           <Route
+            exact
             path="/album/:id"
           >
             {
@@ -77,14 +93,11 @@ export default class Login extends Component {
             }
 
           </Route>
-          <Route path="/favorites"><Favorites { ...this.state } /></Route>
+          <Route exact path="/favorites"><Favorites { ...this.state } /></Route>
           <Route exact path="/profile"><Profile { ...this.state } /></Route>
-          <Route path="/profile/edit"><ProfileEdit { ...this.state } /></Route>
+          <Route exact path="/profile/edit"><ProfileEdit { ...this.state } /></Route>
           <Route path="*" component={ NotFound } />
         </Switch>
-        {loadindScreen ? <LoadingScreen /> : this.renderForm()}
-        {logged && (<Redirect to="/search" />)}
-        {loadingScreenLogged && <LoadingScreen />}
       </div>
     );
   }
