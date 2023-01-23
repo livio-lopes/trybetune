@@ -44,7 +44,13 @@ export default class Search extends Component {
     return (
       <div>
         <h2>{`Resultado de álbuns de: ${search}`}</h2>
-        <div>{resultSearch.map((e) => <CardAlbum key={ e.artistId } { ...e } />)}</div>
+        <div>
+          {resultSearch.map((e, i) => (<CardAlbum
+            key={ i }
+            { ...e }
+          />))}
+
+        </div>
       </div>
     );
   };

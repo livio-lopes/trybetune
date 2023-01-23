@@ -63,8 +63,20 @@ export default class Login extends Component {
     return (
       <div data-testid="page-login">
         <Switch>
-          <Route path="/search"><Search { ...this.state } /></Route>
-          <Route path="/album/:id"><Album { ...this.state } /></Route>
+          <Route path="/search">
+            <Search
+              { ...this.state }
+            />
+
+          </Route>
+          <Route
+            path="/album/:id"
+          >
+            {
+              (props) => <Album { ...props } { ...this.state } />
+            }
+
+          </Route>
           <Route path="/favorites"><Favorites { ...this.state } /></Route>
           <Route exact path="/profile"><Profile { ...this.state } /></Route>
           <Route path="/profile/edit"><ProfileEdit { ...this.state } /></Route>
