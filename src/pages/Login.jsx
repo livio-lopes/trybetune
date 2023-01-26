@@ -78,6 +78,7 @@ export default class Login extends Component {
         {logged && (<Redirect to="/search" />)}
         {loadingScreenLogged && <LoadingScreen />}
         <Switch>
+          <Route path="*" component={ NotFound } />
           <Route exact path="/search">
             <Search
               { ...this.state }
@@ -96,7 +97,6 @@ export default class Login extends Component {
           <Route exact path="/favorites"><Favorites { ...this.state } /></Route>
           <Route exact path="/profile"><Profile { ...this.state } /></Route>
           <Route exact path="/profile/edit"><ProfileEdit { ...this.state } /></Route>
-          <Route path="*" component={ NotFound } />
         </Switch>
       </div>
     );

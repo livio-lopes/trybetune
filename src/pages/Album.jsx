@@ -30,6 +30,11 @@ export default class Album extends Component {
     }));
   };
 
+  getFavorite = (id) => {
+    const { listFavorites } = this.state;
+    return listFavorites.some((t) => t.trackId === id);
+  };
+
   render() {
     const { infoAlbum, listTracks, loadingFavorite } = this.state;
     const { artistName, collectionName, artworkUrl100 } = infoAlbum;
@@ -44,7 +49,12 @@ export default class Album extends Component {
         <div>
           <ul>
             {listTracks.map((e, i) => (
-              <MusicCard key={ i } { ...e } loadScreen={ this.loadScreen } />
+              <MusicCard
+                key={ i }
+                { ...e }
+                saveTrack={ () => this.getFavorite() }
+                loadScreen={ this.loadScreen }
+              />
             ))}
           </ul>
           {loadingFavorite && (<LoadingScreen />)}
