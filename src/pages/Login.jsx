@@ -49,7 +49,7 @@ export default class Login extends Component {
             id="inputName"
             value={ inputName }
             onChange={ handleLogin }
-            placeholder="Qual o seu nome?"
+            placeholder="qual o seu nome?"
           />
         </label>
         <button
