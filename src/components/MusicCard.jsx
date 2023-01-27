@@ -9,12 +9,16 @@ export default class MusicCard extends Component {
     this.loadFavorite();
   }
 
-  handleClick = ({ target }) => {
+  // componentDidUpdate() {
+  //   const { loadScreenFavorite } = this.props;
+  // }
+
+  handleChange = ({ target }) => {
     const { loadScreen } = this.props;
     const { checked } = target;
     this.setState({ saveTrack: checked });
     if (checked) {
-      loadScreen(addSong, { ...this.props });
+      return loadScreen(addSong, { ...this.props });
     }
     loadScreen(removeSong, { ...this.props });
   };
@@ -27,11 +31,17 @@ export default class MusicCard extends Component {
     });
   };
 
+  // handleClick = ({ target }) => {
+  //   const { checked } = target;
+  //   const { loadScreenFavorite } = this.props;
+  //   if (!checked) loadScreenFavorite(removeSong, { ...this.props });
+  // };
+
   render() {
-    const { trackName, previewUrl, trackId } = this.props;
+    const { trackName, previewUrl, trackId, key } = this.props;
     const { saveTrack } = this.state;
     return (
-      <li>
+      <div>
         <span>{trackName}</span>
         <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
@@ -39,20 +49,22 @@ export default class MusicCard extends Component {
           <code>audio</code>
           .
         </audio>
-        <label htmlFor="saveTrack">
-          Favorita
-
+        <label
+          data-testid={ `checkbox-music-${trackId}` }
+          htmlFor={ `saveTrack ${key}` }
+        >
           <input
-            data-testid={ `checkbox-music-${trackId}` }
+            // data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
-            name="saveTrack"
+            name={ `saveTrack ${key}` }
             id={ trackId }
             checked={ saveTrack }
-            onChange={ this.handleClick }
+            onChange={ this.handleChange }
           />
+          Favorita
 
         </label>
-      </li>
+      </div>
     );
   }
 }
