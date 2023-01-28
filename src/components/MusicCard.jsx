@@ -12,10 +12,9 @@ export default class MusicCard extends Component {
   handleClick = ({ target }) => {
     const { loadScreen } = this.props;
     const { checked } = target;
-
     this.setState({ saveTrack: checked });
     if (checked) {
-      return loadScreen(addSong, { ...this.props });
+      loadScreen(addSong, { ...this.props });
     }
     loadScreen(removeSong, { ...this.props });
   };
@@ -41,12 +40,13 @@ export default class MusicCard extends Component {
           .
         </audio>
         <label htmlFor="saveTrack">
-          <span>Favorita</span>
+          Favorita
 
           <input
             data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
             name="saveTrack"
+            id={ trackId }
             checked={ saveTrack }
             onChange={ this.handleClick }
           />
