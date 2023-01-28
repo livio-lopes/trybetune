@@ -66,4 +66,4 @@ export default class Profile extends Component {
   }
 }
 
-//atualizando requisito 13
+// atualizando requisito 13

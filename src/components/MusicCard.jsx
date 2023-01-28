@@ -9,11 +9,7 @@ export default class MusicCard extends Component {
     this.loadFavorite();
   }
 
-  // componentDidUpdate() {
-  //   const { loadScreenFavorite } = this.props;
-  // }
-
-  handleChange = ({ target }) => {
+  handleClick = ({ target }) => {
     const { loadScreen } = this.props;
     const { checked } = target;
     this.setState({ saveTrack: checked });
@@ -31,17 +27,11 @@ export default class MusicCard extends Component {
     });
   };
 
-  // handleClick = ({ target }) => {
-  //   const { checked } = target;
-  //   const { loadScreenFavorite } = this.props;
-  //   if (!checked) loadScreenFavorite(removeSong, { ...this.props });
-  // };
-
   render() {
-    const { trackName, previewUrl, trackId, key } = this.props;
+    const { trackName, previewUrl, trackId } = this.props;
     const { saveTrack } = this.state;
     return (
-      <div>
+      <li>
         <span>{trackName}</span>
         <audio data-testid="audio-component" src={ previewUrl } controls>
           <track kind="captions" />
@@ -53,17 +43,16 @@ export default class MusicCard extends Component {
           Favorita
 
           <input
-            // data-testid={ `checkbox-music-${trackId}` }
+            data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
             name="saveTrack"
             id={ trackId }
             checked={ saveTrack }
-            onChange={ this.handleChange }
+            onChange={ this.handleClick }
           />
-          Favorita
 
         </label>
-      </div>
+      </li>
     );
   }
 }

@@ -73,6 +73,7 @@ export default class ProfileEdit extends Component {
       <div data-testid="page-profile-edit">
         <Header />
         {loaddingEdit && (<LoadingScreen />)}
+        {redirectToProfile && (<Redirect to="/profile" />)}
         <form>
           <label htmlFor="name">
             Nome:
@@ -125,7 +126,6 @@ export default class ProfileEdit extends Component {
 
           </button>
         </form>
-        {redirectToProfile && (<Redirect to="/profile" />)}
       </div>
     );
   }
