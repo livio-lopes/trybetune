@@ -44,11 +44,12 @@ export default class ProfileEdit extends Component {
 
   validationForm = () => {
     const { name, email, image, description } = this.state;
+    const noName = name.length !== 0;
+    const noEmail = email.length !== 0 && email.includes('@test.com');
+    const noImage = image.length !== 0;
+    const noDescription = description.length !== 0;
     this.setState({
-      btnDisable: !((name.length !== 0)
-       && email.includes('@test.com')
-       && (image.length !== 0)
-       && (description.length !== 0)),
+      btnDisable: !(noName && noDescription && noEmail && noImage),
     });
   };
 
