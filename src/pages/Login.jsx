@@ -88,12 +88,16 @@ export default class Login extends Component {
             exact
             path="/album/:id"
           >
-            {
-              (props) => <Album { ...props } { ...this.state } />
-            }
+            { (props) => (<Album
+              { ...props }
+              { ...this.state }
+
+            />)}
 
           </Route>
-          <Route exact path="/favorites"><Favorites { ...this.state } /></Route>
+          <Route exact path="/favorites">
+            <Favorites { ...this.state } />
+          </Route>
           <Route exact path="/profile"><Profile { ...this.state } /></Route>
           <Route exact path="/profile/edit"><ProfileEdit { ...this.state } /></Route>
           <Route path="*" component={ NotFound } />

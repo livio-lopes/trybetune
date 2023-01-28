@@ -9,7 +9,7 @@ export default class Album extends Component {
   state = {
     infoAlbum: {},
     listTracks: [],
-    loadingFavorite: false,
+    loadingAlbum: false,
 
   };
 
@@ -18,8 +18,8 @@ export default class Album extends Component {
   }
 
   loadScreen = (callback, param = '') => {
-    this.setState({ loadingFavorite: true });
-    callback(param).then(() => { this.setState({ loadingFavorite: false }); });
+    this.setState({ loadingAlbum: true });
+    callback(param).then(() => { this.setState({ loadingAlbum: false }); });
   };
 
   getInfoAlbum = () => {
@@ -36,7 +36,7 @@ export default class Album extends Component {
   };
 
   render() {
-    const { infoAlbum, listTracks, loadingFavorite } = this.state;
+    const { infoAlbum, listTracks, loadingAlbum: loadingFavorite } = this.state;
     const { artistName, collectionName, artworkUrl100 } = infoAlbum;
     return (
       <div data-testid="page-album">
@@ -52,7 +52,7 @@ export default class Album extends Component {
               <MusicCard
                 key={ i }
                 { ...e }
-                saveTrack={ () => this.getFavorite() }
+                saveTrack={ this.getFavorite }
                 loadScreen={ this.loadScreen }
               />
             ))}
