@@ -41,12 +41,11 @@ export default class MusicCard extends Component {
         </audio>
         <label htmlFor="saveTrack">
           Favorita
-
           <input
             data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
             name="saveTrack"
-            id={ trackId }
+            id="saveTrack"
             checked={ saveTrack }
             onChange={ this.handleClick }
           />
