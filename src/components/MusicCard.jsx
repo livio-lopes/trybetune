@@ -12,9 +12,9 @@ export default class MusicCard extends Component {
   handleClick = ({ target }) => {
     const { loadScreen } = this.props;
     const { checked } = target;
-    this.setState({ saveTrack: checked });
+    // this.setState({ saveTrack: checked });
     if (checked) {
-      loadScreen(addSong, { ...this.props });
+      return loadScreen(addSong, { ...this.props });
     }
     loadScreen(removeSong, { ...this.props });
   };
@@ -24,6 +24,13 @@ export default class MusicCard extends Component {
     const listFavorites = await getFavoriteSongs();
     this.setState({
       saveTrack: listFavorites.some((e) => e.trackId === trackId),
+    });
+  };
+
+  handleChecked = ({ target }) => {
+    const { checked } = target;
+    this.setState({
+      saveTrack: checked,
     });
   };
 
@@ -48,6 +55,7 @@ export default class MusicCard extends Component {
             id="saveTrack"
             checked={ saveTrack }
             onChange={ this.handleClick }
+            onClick={ this.handleChecked }
           />
 
         </label>
